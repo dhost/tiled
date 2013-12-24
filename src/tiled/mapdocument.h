@@ -236,6 +236,7 @@ public:
     void emitRegionEdited(const QRegion &region, Layer *layer);
     void emitTilesetChanged(Tileset *tileset);
     void emitTileTerrainChanged(const QList<Tile*> &tiles);
+    void emitTileLayerChanged(TileLayer *tileLayer);
     void emitObjectGroupChanged(ObjectGroup *objectGroup);
     void emitImageLayerChanged(ImageLayer *imageLayer);
     void emitEditLayerNameRequested();
@@ -301,6 +302,11 @@ signals:
      * changed. All the tiles are guaranteed to be from the same tileset.
      */
     void tileTerrainChanged(const QList<Tile*> &tiles);
+
+    /**
+     * Emitted after the color of a tile layer has changed.
+     */
+    void tileLayerChanged(TileLayer *tileLayer);
 
     /**
      * Emitted after the color of an object group has changed.
@@ -410,6 +416,15 @@ inline void MapDocument::emitTileTerrainChanged(const QList<Tile *> &tiles)
 {
     if (!tiles.isEmpty())
         emit tileTerrainChanged(tiles);
+}
+
+/**
+ * Emits the tileLayerChanged signal, should be called when changing the
+ * color of a tile layer.
+ */
+inline void MapDocument::emitTileLayerChanged(TileLayer *tileLayer)
+{
+    emit tileLayerChanged(tileLayer);
 }
 
 /**

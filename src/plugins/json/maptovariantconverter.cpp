@@ -181,6 +181,9 @@ QVariant MapToVariantConverter::toVariant(const TileLayer *tileLayer) const
 
     addLayerAttributes(tileLayerVariant, tileLayer);
 
+    if (tileLayer->color().isValid())
+        tileLayerVariant["color"] = tileLayer->color().name();
+
     QVariantList tileVariants;
     for (int y = 0; y < tileLayer->height(); ++y)
         for (int x = 0; x < tileLayer->width(); ++x)

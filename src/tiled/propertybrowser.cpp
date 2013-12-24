@@ -26,6 +26,7 @@
 #include "changemapproperties.h"
 #include "changeobjectgroupproperties.h"
 #include "changeproperties.h"
+#include "changetilelayerproperties.h"
 #include "flipmapobjects.h"
 #include "imagelayer.h"
 #include "map.h"
@@ -146,6 +147,8 @@ void PropertyBrowser::setMapDocument(MapDocument *mapDocument)
                 SLOT(objectsChanged(QList<MapObject*>)));
         connect(mapDocument, SIGNAL(layerChanged(int)),
                 SLOT(layerChanged(int)));
+        connect(mapDocument, SIGNAL(tileLayerChanged(TileLayer*)),
+                SLOT(tileLayerChanged(TileLayer*)));
         connect(mapDocument, SIGNAL(objectGroupChanged(ObjectGroup*)),
                 SLOT(objectGroupChanged(ObjectGroup*)));
         connect(mapDocument, SIGNAL(imageLayerChanged(ImageLayer*)),
@@ -204,6 +207,12 @@ void PropertyBrowser::objectsChanged(const QList<MapObject *> &objects)
 void PropertyBrowser::layerChanged(int index)
 {
     if (mObject == mMapDocument->map()->layerAt(index))
+        updateProperties();
+}
+
+void PropertyBrowser::tileLayerChanged(TileLayer *tileLayer)
+{
+    if (mObject == tileLayer)
         updateProperties();
 }
 
@@ -366,6 +375,7 @@ void PropertyBrowser::addTileLayerProperties()
 {
     QtProperty *groupProperty = mGroupManager->addProperty(tr("Tile Layer"));
     addLayerProperties(groupProperty);
+    createProperty(ColorProperty, QVariant::Color, tr("Color"), groupProperty);
     addProperty(groupProperty);
 }
 
@@ -538,8 +548,23 @@ void PropertyBrowser::applyLayerValue(PropertyId id, const QVariant &val)
 
 void PropertyBrowser::applyTileLayerValue(PropertyId id, const QVariant &val)
 {
-    Q_UNUSED(id)
-    Q_UNUSED(val)
+    TileLayer *tileLayer = static_cast<TileLayer*>(mObject);
+    QUndoStack *undoStack = mMapDocument->undoStack();
+
+    switch (id) {
+    case ColorProperty: {
+        QColor color = val.value<QColor>();
+        if (color == Qt::gray)
+            color = QColor();
+
+        undoStack->push(new ChangeTileLayerProperties(mMapDocument,
+                                                       tileLayer,
+                                                       color));
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void PropertyBrowser::applyObjectGroupValue(PropertyId id, const QVariant &val)
@@ -701,8 +726,14 @@ void PropertyBrowser::updateProperties()
         mIdToProperty[OpacityProperty]->setValue(layer->opacity());
 
         switch (layer->layerType()) {
-        case Layer::TileLayerType:
+        case Layer::TileLayerType: {
+            const TileLayer *tileLayer = static_cast<const TileLayer*>(layer);
+            QColor color = tileLayer->color();
+            if (!color.isValid())
+                color = Qt::gray;
+            mIdToProperty[ColorProperty]->setValue(color);
             break;
+        }
         case Layer::ObjectGroupType: {
             const ObjectGroup *objectGroup = static_cast<const ObjectGroup*>(layer);
             QColor color = objectGroup->color();

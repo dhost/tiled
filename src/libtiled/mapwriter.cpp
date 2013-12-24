@@ -356,6 +356,11 @@ void MapWriterPrivate::writeTileLayer(QXmlStreamWriter &w,
 {
     w.writeStartElement(QLatin1String("layer"));
     writeLayerAttributes(w, tileLayer);
+
+    if (tileLayer->color().isValid())
+        w.writeAttribute(QLatin1String("color"),
+                         tileLayer->color().name());
+
     writeProperties(w, tileLayer->properties());
 
     QString encoding;

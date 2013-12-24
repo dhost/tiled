@@ -507,6 +507,10 @@ TileLayer *MapReaderPrivate::readLayer()
     TileLayer *tileLayer = new TileLayer(name, x, y, width, height);
     readLayerAttributes(tileLayer, atts);
 
+    const QString color = atts.value(QLatin1String("color")).toString();
+    if (!color.isEmpty())
+        tileLayer->setColor(color);
+
     while (xml.readNextStartElement()) {
         if (xml.name() == QLatin1String("properties"))
             tileLayer->mergeProperties(readProperties());

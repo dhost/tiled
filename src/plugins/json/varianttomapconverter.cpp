@@ -232,6 +232,8 @@ TileLayer *VariantToMapConverter::toTileLayer(const QVariantMap &variantMap)
     tileLayer->setOpacity(opacity);
     tileLayer->setVisible(visible);
 
+    tileLayer->setColor(variantMap.value("color").value<QColor>());
+
     int x = 0;
     int y = 0;
     bool ok;

@@ -254,6 +254,9 @@ public:
     bool canMergeWith(Layer *other) const;
     Layer *mergedWith(Layer *other) const;
 
+    const QColor &color() const;
+    void setColor(const QColor &color);
+
     /**
      * Returns the region where this tile layer and the given tile layer
      * are different. The relative positions of the layers are taken into
@@ -275,7 +278,21 @@ private:
     QSize mMaxTileSize;
     QMargins mOffsetMargins;
     QVector<Cell> mGrid;
+    QColor mColor;
 };
+
+/**
+ * Returns the color of the tile layer, or an invalid color if no color
+ * is set.
+ */
+inline const QColor &TileLayer::color() const
+{ return mColor; }
+
+/**
+ * Sets the display color of the tile layer.
+ */
+inline void TileLayer::setColor(const QColor &color)
+{ mColor = color; }
 
 
 template<typename Condition>

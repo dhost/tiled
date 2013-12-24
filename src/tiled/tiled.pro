@@ -61,6 +61,7 @@ SOURCES += aboutdialog.cpp \
     changeobjectgroupproperties.cpp \
     changepolygon.cpp \
     changeproperties.cpp \
+    changetilelayerproperties.cpp \
     changetileselection.cpp \
     changetileterrain.cpp \
     clipboardmanager.cpp \
@@ -175,6 +176,7 @@ HEADERS += aboutdialog.h \
     changeobjectgroupproperties.h \
     changepolygon.h \
     changeproperties.h \
+    changetilelayerproperties.h \
     changetileselection.h \
     changetileterrain.h \
     clipboardmanager.h \
