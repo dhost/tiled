@@ -74,6 +74,8 @@ Preferences::Preferences()
     mObjectLineWidth = realValue("ObjectLineWidth", 2);
     mHighlightCurrentLayer = boolValue("HighlightCurrentLayer");
     mShowTilesetGrid = boolValue("ShowTilesetGrid", true);
+    mTilesetTransparencyColor = colorValue("TilesetTransparencyColor", Qt::white);
+
     mLanguage = stringValue("Language");
     mUseOpenGL = boolValue("OpenGL");
     mSettings->endGroup();
@@ -196,6 +198,16 @@ void Preferences::setShowTilesetGrid(bool showTilesetGrid)
     mSettings->setValue(QLatin1String("Interface/ShowTilesetGrid"),
                         mShowTilesetGrid);
     emit showTilesetGridChanged(mShowTilesetGrid);
+}
+
+void Preferences::setTilesetTransparencyColor(QColor tilesetTransparencyColor)
+{
+    if (mTilesetTransparencyColor == tilesetTransparencyColor)
+        return;
+
+    mTilesetTransparencyColor = tilesetTransparencyColor;
+    mSettings->setValue(QLatin1String("Interface/TilesetTransparencyColor"), mTilesetTransparencyColor.name());
+    emit tilesetTransparencyColorChanged(mTilesetTransparencyColor);
 }
 
 Map::LayerDataFormat Preferences::layerDataFormat() const

@@ -225,6 +225,11 @@ void TileDelegate::paint(QPainter *painter,
     targetRect.setTop(targetRect.bottom() - tileSize.height() + 1);
     targetRect.setRight(targetRect.left() + tileSize.width() - 1);
 
+    // If a valid tileset transparency color is available, draw a background
+    Preferences *prefs = Preferences::instance();
+    if(prefs->tilesetTransparencyColor().isValid())
+        painter->fillRect(targetRect, prefs->tilesetTransparencyColor());
+
     // Draw the tile image
     if (Zoomable *zoomable = mTilesetView->zoomable())
         if (zoomable->smoothTransform())

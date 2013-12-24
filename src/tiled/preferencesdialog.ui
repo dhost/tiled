@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>421</width>
-    <height>383</height>
+    <width>423</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,40 +55,13 @@
        </item>
        <item>
         <widget class="QGroupBox" name="groupBox_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="title">
           <string>Interface</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="5" column="0" colspan="4">
-           <widget class="QCheckBox" name="openGL">
-            <property name="text">
-             <string>Hardware &amp;accelerated drawing (OpenGL)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>&amp;Language:</string>
-            </property>
-            <property name="buddy">
-             <cstring>languageCombo</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Grid color:</string>
-            </property>
-            <property name="buddy">
-             <cstring>gridColor</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="Tiled::Internal::ColorButton" name="gridColor"/>
-          </item>
           <item row="0" column="4">
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -112,6 +85,36 @@
             </property>
             <property name="buddy">
              <cstring>gridFine</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>&amp;Language:</string>
+            </property>
+            <property name="buddy">
+             <cstring>languageCombo</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Grid color:</string>
+            </property>
+            <property name="buddy">
+             <cstring>gridColor</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Object line width:</string>
+            </property>
+            <property name="buddy">
+             <cstring>objectLineWidth</cstring>
             </property>
            </widget>
           </item>
@@ -141,13 +144,30 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label">
+          <item row="2" column="3">
+           <widget class="Tiled::Internal::ColorButton" name="gridColor"/>
+          </item>
+          <item row="6" column="0" colspan="4">
+           <widget class="QCheckBox" name="openGL">
             <property name="text">
-             <string>Object line width:</string>
+             <string>Hardware &amp;accelerated drawing (OpenGL)</string>
             </property>
-            <property name="buddy">
-             <cstring>objectLineWidth</cstring>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="toolTip">
+             <string>In the Tileset pane, show transparency as this color.</string>
+            </property>
+            <property name="text">
+             <string>Tileset transparency color:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="Tiled::Internal::ColorButton" name="tilesetTransparencyColor">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -354,8 +374,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>313</x>
-     <y>373</y>
+     <x>322</x>
+     <y>446</y>
     </hint>
     <hint type="destinationlabel">
      <x>315</x>

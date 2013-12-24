@@ -51,9 +51,9 @@ public:
     QColor gridColor() const { return mGridColor; }
     int gridFine() const { return mGridFine; }
     qreal objectLineWidth() const { return mObjectLineWidth; }
-
     bool highlightCurrentLayer() const { return mHighlightCurrentLayer; }
     bool showTilesetGrid() const { return mShowTilesetGrid; }
+    QColor tilesetTransparencyColor() const { return mTilesetTransparencyColor; }
 
     Map::LayerDataFormat layerDataFormat() const;
     void setLayerDataFormat(Map::LayerDataFormat layerDataFormat);
@@ -104,6 +104,7 @@ public slots:
     void setObjectLineWidth(qreal lineWidth);
     void setHighlightCurrentLayer(bool highlight);
     void setShowTilesetGrid(bool showTilesetGrid);
+    void setTilesetTransparencyColor(QColor tilesetTransparencyColor);
 
 signals:
     void showGridChanged(bool showGrid);
@@ -115,6 +116,7 @@ signals:
     void objectLineWidthChanged(qreal lineWidth);
     void highlightCurrentLayerChanged(bool highlight);
     void showTilesetGridChanged(bool showTilesetGrid);
+    void tilesetTransparencyColorChanged(QColor tilesetTransparencyColor);
 
     void useOpenGLChanged(bool useOpenGL);
 
@@ -143,6 +145,7 @@ private:
     qreal mObjectLineWidth;
     bool mHighlightCurrentLayer;
     bool mShowTilesetGrid;
+    QColor mTilesetTransparencyColor;
 
     Map::LayerDataFormat mLayerDataFormat;
     bool mDtdEnabled;

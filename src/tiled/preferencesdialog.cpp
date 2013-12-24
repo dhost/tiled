@@ -144,6 +144,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
             Preferences::instance(), SLOT(setGridFine(int)));
     connect(mUi->objectLineWidth, SIGNAL(valueChanged(double)),
             SLOT(objectLineWidthChanged(double)));
+    connect(mUi->tilesetTransparencyColor, SIGNAL(colorChanged(QColor)),
+            Preferences::instance(), SLOT(setTilesetTransparencyColor(QColor)));
 
     connect(mUi->objectTypesTable->selectionModel(),
             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
@@ -314,6 +316,7 @@ void PreferencesDialog::fromPreferences()
     mUi->gridColor->setColor(prefs->gridColor());
     mUi->gridFine->setValue(prefs->gridFine());
     mUi->objectLineWidth->setValue(prefs->objectLineWidth());
+    mUi->tilesetTransparencyColor->setColor(prefs->tilesetTransparencyColor());
     mUi->autoMapWhileDrawing->setChecked(prefs->automappingDrawing());
     mObjectTypesModel->setObjectTypes(prefs->objectTypes());
 }
